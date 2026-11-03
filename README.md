@@ -1,9 +1,7 @@
 # TalentSkills · Agente Calificador de Leads (Proyecto Integrador)
-
-**Curso:** Automation IA Avanzado  
-**Autora:** Guadalupe Salgado  
+ 
+**Alumna:** Guadalupe Salgado  
 **Entrega actual:** Checkpoint 1: Configuración e Interfaces Agénticas  
-**Plataforma:** n8n 2.38.7 (self-hosted)
 
 ## Descripción
 
@@ -26,7 +24,7 @@ Chat de entrada ──► Agente Calificador de Leads ──► Responder en el 
 | Disparador | Chat Trigger, con Response Mode en *Using Response Nodes* |
 | Cerebro | AI Agent v3.1. En n8n 2.x este nodo funciona siempre como Tools Agent |
 | Modelo | Google Gemini Chat Model (`gemini-3.1-flash-lite`) |
-| Guardrail | Max Iterations = **8** |
+| Guardrail | Max Iterations = **5** |
 | System Prompt | Modular: Rol → Ámbito → Objetivo → Reglas → Escalamiento, sin lenguaje inclusivo |
 | Herramienta | Google Sheets como Tool lateral, con descripción semántica manual de cuándo usarla y cuándo no |
 | Flujo no lineal | El agente recibe el mensaje directo del trigger, sin nodos IF ni Switch antes |
@@ -42,13 +40,6 @@ Chat de entrada ──► Agente Calificador de Leads ──► Responder en el 
 
 Plan recomendado según la cantidad de empleados: hasta 30, Básico; de 31 a 100, Platinum; de 101 a 300, Gold; más de 300, A medida.
 
-## Cómo importarlo
-
-1. En n8n: **Create workflow** → menú **…** → **Import from File** → `checkpoint1_guadalupe_salgado.json`.
-2. Asignar las credenciales: Google Gemini (PaLM) API, Google Sheets OAuth2 API y Slack API.
-3. En *Registrar lead en planilla*, elegir la planilla con estas columnas:
-   `fecha_registro, nombre, email, organizacion, cantidad_empleados, necesidad, clasificacion, plan_recomendado`
-4. En el nodo de Slack, elegir el canal de logs.
 
 ## Prueba de validación
 
@@ -63,16 +54,8 @@ Resultado esperado: el agente decide usar la herramienta, registra el lead (plan
 ### Evidencias
 
 <!-- Reemplazá estas líneas por tus capturas, por ejemplo: ![Lienzo en verde](capturas/lienzo.png) -->
-- Lienzo con la ejecución en verde
+- Ejecución 1 en verde (vease en la carpeta "capturas")
 - Panel Logs con el uso de la herramienta
 - Fila registrada en Google Sheets
 - Log recibido en Slack
 
-## Hoja de ruta del proyecto integrador
-
-- [x] Checkpoint 1: agente base y motor de razonamiento
-- [ ] M3 · Memoria y contexto
-- [ ] M4 · Herramientas e integraciones reales
-- [ ] M5 · RAG / base documental
-- [ ] M6 · Voz
-- [ ] M11 · Proyecto Final Integrador
