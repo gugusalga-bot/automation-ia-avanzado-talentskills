@@ -12,7 +12,7 @@
 | Casilla de correo | Gmail | Gmail - Soporte TalentSkills | OAuth2 desde n8n | gmail.readonly y gmail.compose (Custom Scopes) |
 | Canal del equipo | Slack | Slack account | Bot Token emitido por la instalación OAuth v2 de la app | chat:write y channels:read |
 
-![Credenciales activas en n8n](capturas/credenciales.png)
+[![Credenciales activas en n8n](capturas/credenciales.png)](https://github.com/gugusalga-bot/automation-ia-avanzado-talentskills/blob/main/checkpoint4/Captura%20credenciales.PNG)
 
 **Notas sobre la autenticación IMPORTANTE:**
 
