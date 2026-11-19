@@ -21,6 +21,8 @@
 
 ## Carril de email (se suma al flujo del Manager orquestador)
 
+Flujo visual: https://github.com/gugusalga-bot/automation-ia-avanzado-talentskills/blob/main/checkpoint4/Flujo%20de%20entregable%204.png)
+
 Email entrante (Gmail Trigger, filtro to:+talentskills) → ¿Es auto-respuesta? (IF) → Agente de Email (AI Agent) → Limpiar y validar payload (Set) → ¿Email válido? → Buscar contacto en HubSpot (Look up) → Actualizar contacto / Crear contacto → Crear borrador (Gmail Create Draft) → Preparar aviso (Set) → Avisar al equipo (Slack)
 
 El carril del chat con memoria en Airtable y los Workers siguen funcionando en el mismo workflow.
