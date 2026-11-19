@@ -1,8 +1,8 @@
 # Checkpoint 4 · Integraciones con HubSpot, Gmail y Slack
 
-**Proyecto:** TalentSkills · Agente Calificador de Leads (proyecto integrador)
-**Autora:** Guadalupe Salgado
-**Plataforma:** n8n 2.38.7 self-hosted (localhost)
+**Proyecto:** TalentSkills · Agente Calificador de Leads
+**Hecho por:** Guadalupe Salgado
+**N8N utilizado:** n8n 2.38.7 self-hosted (localhost)
 
 ## Herramientas conectadas
 
@@ -14,18 +14,18 @@
 
 ![Credenciales activas en n8n](capturas/credenciales.png)
 
-**Notas sobre la autenticación:**
+**Notas sobre la autenticación IMPORTANTE:**
 
 - **HubSpot:** desde el 23 de junio de 2026 HubSpot no permite crear apps públicas legacy, que eran las que usaba la credencial OAuth2 de n8n. Las apps OAuth nuevas requieren el sistema de proyectos por CLI. Se usó una clave de servicio, la alternativa oficial de HubSpot para llamar a su API, con solo los dos scopes de contactos.
 - **Slack:** Slack exige direcciones de retorno HTTPS para OAuth2, y esta instancia de n8n corre en http://localhost. Se usó el Bot Token de la app, que Slack emite mediante su instalación OAuth v2 (Install to Workspace), con los scopes recortados al mínimo.
 
-## Carril de email (agregado al Manager del M3)
+## Carril de email (se suma al flujo del Manager orquestador)
 
 Email entrante (Gmail Trigger, filtro to:+talentskills) → ¿Es auto-respuesta? (IF) → Agente de Email (AI Agent) → Limpiar y validar payload (Set) → ¿Email válido? → Buscar contacto en HubSpot (Look up) → Actualizar contacto / Crear contacto → Crear borrador (Gmail Create Draft) → Preparar aviso (Set) → Avisar al equipo (Slack)
 
-El carril del chat con memoria en Airtable (M3) y los Workers (M2) siguen funcionando en el mismo workflow.
+El carril del chat con memoria en Airtable y los Workers siguen funcionando en el mismo workflow.
 
-## Controles preventivos
+## Controles
 
 1. **IF anti auto-reply:** descarta asuntos con Auto-reply, Out of office, Undeliverable y similares, y remitentes no-reply o mailer-daemon. Corta el bucle infinito de respuestas automáticas.
 2. **Look up antes del Create:** busca el contacto por email en HubSpot; si existe lo actualiza y si no, lo crea. Evita el Error 409 por duplicados.
@@ -37,7 +37,3 @@ El carril del chat con memoria en Airtable (M3) y los Workers (M2) siguen funcio
 - Gmail: 2 scopes en lugar de los 6 por defecto, sin acceso total al correo. El filtro del trigger limita el procesamiento a la dirección +talentskills.
 - HubSpot: la clave de servicio solo puede leer y escribir contactos; no accede a empresas, negocios, formularios ni tickets.
 - Slack: el bot solo tiene chat:write y channels:read, y solo publica en los canales donde fue invitado.
-
-## Cómo importarlo
-
-n8n → Create workflow → menú … → Import from File. Hay que asignar las credenciales propias de Gmail, HubSpot, Slack, Airtable y Gemini, y volver a elegir los Workers del M2 en los nodos Execute Workflow.
